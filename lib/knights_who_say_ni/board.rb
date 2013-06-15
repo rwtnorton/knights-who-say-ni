@@ -31,5 +31,11 @@ module KnightsWhoSayNi
       cover?(position)
     end
 
+    def positions
+      height_bounds.to_a.product(width_bounds.to_a).map { |r, c|
+        Position[r, c]
+      }
+    end
+
   end
 end

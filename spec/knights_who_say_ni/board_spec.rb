@@ -14,8 +14,8 @@ describe test_class do
 
   describe "given required constructor arguments" do
     before do
-      @width = 6
-      @height = 8
+      @width = 4
+      @height = 3
       @board = test_class.new(:width => @width, :height => @height)
     end
 
@@ -72,6 +72,27 @@ describe test_class do
       it "stringifies to expected format" do
         expected = "[#{@width} x #{@height}]"
         @board.to_s.must_equal(expected)
+      end
+    end
+
+    describe "#positions" do
+      it "returns all positions" do
+        expected = [
+                    '[0, 0]',
+                    '[0, 1]',
+                    '[0, 2]',
+                    '[0, 3]',
+                    '[1, 0]',
+                    '[1, 1]',
+                    '[1, 2]',
+                    '[1, 3]',
+                    '[2, 0]',
+                    '[2, 1]',
+                    '[2, 2]',
+                    '[2, 3]',
+                    ].join("\n")
+        @board.positions.map { |pos| "[#{pos.row}, #{pos.col}]" }.join("\n")
+          .must_equal(expected)
       end
     end
   end
