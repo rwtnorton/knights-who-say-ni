@@ -3,30 +3,30 @@ module KnightsWhoSayNi
 
     include Enumerable
 
-    attr_reader :width, :height, :width_bounds, :height_bounds
+    attr_reader :cols, :rows, :col_bounds, :row_bounds
 
     def initialize(args={})
-      @width = args.fetch(:width)
-      @height = args.fetch(:height)
-      @width_bounds = 0 .. (width - 1)
-      @height_bounds = 0 .. (height - 1)
+      @cols = args.fetch(:cols)
+      @rows = args.fetch(:rows)
+      @col_bounds = 0 .. (cols - 1)
+      @row_bounds = 0 .. (rows - 1)
     end
 
-    def self.[](width, height)
-      new(:width => width, :height => height)
+    def self.[](rows, cols)
+      new(:rows => rows, :cols => cols)
     end
 
     def to_s
-      "[#{width} x #{height}]"
+      "[#{rows} x #{cols}]"
     end
 
     def to_a
-      [width, height]
+      [rows, cols]
     end
 
     def cover?(position)
-      width_bounds === position.row &&
-        height_bounds === position.col
+      col_bounds === position.col &&
+        row_bounds === position.row
     end
 
     def ===(position)
@@ -34,7 +34,7 @@ module KnightsWhoSayNi
     end
 
     def positions
-      height_bounds.to_a.product(width_bounds.to_a).map { |r, c|
+      row_bounds.to_a.product(col_bounds.to_a).map { |r, c|
         Position[r, c]
       }
     end

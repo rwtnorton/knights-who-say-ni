@@ -14,29 +14,29 @@ describe test_class do
 
   describe "given required constructor arguments" do
     before do
-      @width = 4
-      @height = 3
-      @board = test_class.new(:width => @width, :height => @height)
+      @rows = 3
+      @cols = 4
+      @board = test_class.new(:rows => @rows, :cols => @cols)
     end
 
-    it "has the correct width" do
-      @board.width.must_equal(@width)
+    it "has the correct cols" do
+      @board.cols.must_equal(@cols)
     end
 
-    it "has the correct height" do
-      @board.height.must_equal(@height)
+    it "has the correct rows" do
+      @board.rows.must_equal(@rows)
     end
 
     it "Array()-ifies correctly" do
       got = Array(@board)
-      got[0].must_equal(@width)
-      got[1].must_equal(@height)
+      got[0].must_equal(@rows)
+      got[1].must_equal(@cols)
     end
 
     it "splats correctly" do
-      w, h = *@board
-      w.must_equal(@width)
-      h.must_equal(@height)
+      r, c = *@board
+      r.must_equal(@rows)
+      c.must_equal(@cols)
     end
 
     describe "#cover?" do
@@ -45,12 +45,12 @@ describe test_class do
         @board.must_be :cover?, pos
       end
 
-      it "returns false for position outside its width bound" do
+      it "returns false for position outside its cols bound" do
         pos = OpenStruct.new(:row => 100, :col => 0)
         @board.wont_be :cover?, pos
       end
 
-      it "returns false for position outside its height bound" do
+      it "returns false for position outside its rows bound" do
         pos = OpenStruct.new(:row => 1, :col => 20)
         @board.wont_be :cover?, pos
       end
@@ -70,7 +70,7 @@ describe test_class do
 
     describe "#to_s" do
       it "stringifies to expected format" do
-        expected = "[#{@width} x #{@height}]"
+        expected = "[#{@rows} x #{@cols}]"
         @board.to_s.must_equal(expected)
       end
     end
@@ -134,7 +134,7 @@ describe test_class do
   end
 
   describe "regarding class method .[]" do
-    it "requires width and height positional args" do
+    it "requires cols and rows positional args" do
       lambda {
         test_class[]
       }.must_raise ArgumentError
@@ -142,8 +142,8 @@ describe test_class do
 
     it "generates correct board given required args" do
       board = test_class[7, 42]
-      board.width.must_equal(7)
-      board.height.must_equal(42)
+      board.rows.must_equal(7)
+      board.cols.must_equal(42)
     end
   end
 
