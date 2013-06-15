@@ -95,6 +95,42 @@ describe test_class do
           .must_equal(expected)
       end
     end
+
+    describe "#each" do
+      it "yields positions by row then col" do
+        actual = []
+        @board.each do |pos|
+          actual << "[#{pos.row}, #{pos.col}]"
+        end
+        expected = [
+                    '[0, 0]',
+                    '[0, 1]',
+                    '[0, 2]',
+                    '[0, 3]',
+                    '[1, 0]',
+                    '[1, 1]',
+                    '[1, 2]',
+                    '[1, 3]',
+                    '[2, 0]',
+                    '[2, 1]',
+                    '[2, 2]',
+                    '[2, 3]',
+                    ].join("\n")
+        actual.join("\n").must_equal expected
+      end
+    end
+
+    describe "as an enumerable" do
+      it "can select positions along main diagonal" do
+        expected = [
+                    '[0, 0]',
+                    '[1, 1]',
+                    '[2, 2]',
+                   ].join("\n")
+        @board.select { |pos| pos.row == pos.col }.map { |pos|
+          "[#{pos.row}, #{pos.col}]" }.join("\n").must_equal expected
+      end
+    end
   end
 
   describe "regarding class method .[]" do

@@ -1,6 +1,8 @@
 module KnightsWhoSayNi
   class Board
 
+    include Enumerable
+
     attr_reader :width, :height, :width_bounds, :height_bounds
 
     def initialize(args={})
@@ -35,6 +37,10 @@ module KnightsWhoSayNi
       height_bounds.to_a.product(width_bounds.to_a).map { |r, c|
         Position[r, c]
       }
+    end
+
+    def each(&blk)
+      positions.each(&blk)
     end
 
   end
