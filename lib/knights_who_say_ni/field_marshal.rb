@@ -7,20 +7,15 @@ module KnightsWhoSayNi
 
     def initialize(args={})
       @board = args.fetch(:board)
+      @positions = Set.new(board.positions)
     end
 
     def pairings
-      result = Set.new
-      positions = Set.new(board.positions)
-      positions.each do |white_pos|
-        legal_white_moves = adjudicator_for_position(white_pos).legal_moves
-        legal_black_moves = positions.difference(Set[white_pos])
-          .difference(legal_white_moves)
-        legal_black_moves.each do |black_pos|
-          result << { :white => white_pos, :black => black_pos }
-        end
-      end
-      result
+      positions.map { |white_pos|
+        legal_black_moves(white_pos).map { |black_pos|
+          { :white => white_pos, :black => black_pos }
+        }
+      }.flatten.to_set
     end
 
     def self.[](rows, cols)
@@ -28,6 +23,8 @@ module KnightsWhoSayNi
     end
 
 private
+
+    attr_reader :positions
 
     def adjudicator_for_knight(knight)
       Adjudicator.new(:board => board, :knight => knight)
@@ -39,6 +36,15 @@ private
 
     def knight_at(position)
       Knight.new(:position => position)
+    end
+
+    def legal_white_moves(white_pos)
+      adjudicator_for_position(white_pos).legal_moves
+    end
+
+    def legal_black_moves(white_pos)
+      positions.difference(Set[white_pos])
+        .difference(legal_white_moves(white_pos))
     end
 
   end
