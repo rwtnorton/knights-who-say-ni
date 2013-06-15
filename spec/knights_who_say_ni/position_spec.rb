@@ -1,4 +1,4 @@
-require_relative File.join '..', 'common.rb'
+require_relative File.join('..', 'common')
 
 test_class = KnightsWhoSayNi::Position
 

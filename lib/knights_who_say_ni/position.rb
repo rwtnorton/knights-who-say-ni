@@ -16,10 +16,10 @@ module KnightsWhoSayNi
       self.class.new(:row => row, :col => new_col)
     end
 
-    def to_ary
+    # Supports splatting.
+    def to_a
       [row, col]
     end
-    alias_method :to_a, :to_ary # Supports splatting.
 
     def ==(other)
       row == other.row && col == other.col
