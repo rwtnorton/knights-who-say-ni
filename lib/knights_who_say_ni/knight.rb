@@ -5,16 +5,10 @@ module KnightsWhoSayNi
 
     include Enumerable
 
-    ADJUSTMENTS = [
-                   { :row =>  1, :col =>  2 },
-                   { :row =>  1, :col => -2 },
-                   { :row => -1, :col =>  2 },
-                   { :row => -1, :col => -2 },
-                   { :row =>  2, :col =>  1 },
-                   { :row =>  2, :col => -1 },
-                   { :row => -2, :col =>  1 },
-                   { :row => -2, :col => -1 },
-                  ]
+    ADJUSTMENTS = lambda do
+      vs = [-2, -1, 1, 2]
+      vs.product(vs).reject { |x, y| x.abs == y.abs }
+    end.call
 
     attr_reader :position
 
@@ -23,9 +17,9 @@ module KnightsWhoSayNi
     end
 
     def moves
-      Set.new(ADJUSTMENTS.map { |delta|
-                Position[ position.row + delta[:row],
-                          position.col + delta[:col] ]
+      Set.new(ADJUSTMENTS.map { |row, col|
+                Position[position.row + row,
+                         position.col + col]
               })
     end
 
