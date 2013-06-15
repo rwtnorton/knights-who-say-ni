@@ -62,6 +62,20 @@ describe test_class do
       end
     end
 
+    describe "#threaten?" do
+      it "returns true for position in moves" do
+        position = OpenStruct.new(:row => 3, :col => 1)
+        piece = OpenStruct.new(:position => position)
+        @knight.must_be :threaten?, piece
+      end
+
+      it "returns false for position not in moves" do
+        position = OpenStruct.new(:row => 0, :col => 1)
+        piece = OpenStruct.new(:position => position)
+        @knight.wont_be :threaten?, piece
+      end
+    end
+
     describe "#each" do
       it "yields all possible move positions" do
         actual = Set.new

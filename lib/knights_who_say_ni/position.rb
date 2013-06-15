@@ -25,6 +25,10 @@ module KnightsWhoSayNi
       row == other.row && col == other.col
     end
 
+    def eql?(other)
+      self == other
+    end
+
     def hash
       row.hash + col.hash
     end

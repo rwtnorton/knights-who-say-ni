@@ -23,12 +23,22 @@ module KnightsWhoSayNi
               })
     end
 
+    def threaten?(piece)
+      row = piece.position.row
+      col = piece.position.col
+      moves.member? Position[row, col]
+    end
+
     def each(&blk)
       moves.each(&blk)
     end
 
     def ==(other)
       position == other.position
+    end
+
+    def eql?(other)
+      position.eql? other.position
     end
 
     def hash
