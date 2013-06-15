@@ -18,6 +18,7 @@
 require 'knights_who_say_ni/version'
 require 'knights_who_say_ni/position'
 require 'knights_who_say_ni/board'
+require 'knights_who_say_ni/knight'
 
 module KnightsWhoSayNi
 end
