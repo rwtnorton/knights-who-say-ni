@@ -16,6 +16,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 require 'knights_who_say_ni/version'
+require 'knights_who_say_ni/position'
 
 module KnightsWhoSayNi
 end
