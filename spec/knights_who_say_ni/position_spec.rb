@@ -27,14 +27,16 @@ describe KnightsWhoSayNi::Position do
       @position.col.must_equal(@col)
     end
 
-    it 'can set row' do
-      @position.row = 10
-      @position.row.must_equal(10)
+    it 'builds new position via with_row' do
+      @position.with_row(10).row.must_equal(10)
+      @position.row.must_equal(@row)
+      @position.col.must_equal(@col)
     end
 
-    it 'can set col' do
-      @position.col = 42
-      @position.col.must_equal(42)
+    it 'builds new position via with_col' do
+      @position.with_col(42).col.must_equal(42)
+      @position.row.must_equal(@row)
+      @position.col.must_equal(@col)
     end
 
     it 'converts to array via to_ary' do

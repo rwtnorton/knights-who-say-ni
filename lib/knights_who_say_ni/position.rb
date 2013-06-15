@@ -1,11 +1,19 @@
 module KnightsWhoSayNi
   class Position
 
-    attr_accessor :row, :col
+    attr_reader :row, :col
 
     def initialize(args={})
       @row = args.fetch(:row)
       @col = args.fetch(:col)
+    end
+
+    def with_row(new_row)
+      self.class.new(:row => new_row, :col => col)
+    end
+
+    def with_col(new_col)
+      self.class.new(:row => row, :col => new_col)
     end
 
     def to_ary
