@@ -20,6 +20,7 @@ require 'knights_who_say_ni/position'
 require 'knights_who_say_ni/board'
 require 'knights_who_say_ni/knight'
 require 'knights_who_say_ni/adjudicator'
+require 'knights_who_say_ni/field_marshal'
 
 module KnightsWhoSayNi
 end
