@@ -1,4 +1,4 @@
-# Knights::Who::Say::Ni
+# KnightsWhoSayNi
 
 Counts the number of legal positions of two opposing knights on
 an N x M chess board.
