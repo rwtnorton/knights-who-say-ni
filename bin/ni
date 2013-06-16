@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+lib = File.expand_path('../../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+
+require 'knights_who_say_ni'
+
+if (ARGV.empty? or %w[--help -h --usage].any? { |s| ARGV.include? s })
+  puts <<END_USAGE
+Usage: #$0 rows cols
+END_USAGE
+  exit
+end
+
+abort 'NI!' if ARGV.size < 2
+
+arg_rows, arg_cols = *ARGV
+abort 'NI!!' if arg_rows !~ /\A\d+\z/
+abort 'NI!!!' if arg_cols !~ /\A\d+\z/
+
+rows, cols = *[arg_rows, arg_cols].map(&:to_i)
+
+puts KnightsWhoSayNi::FieldMarshal[rows, cols].pairings.size
