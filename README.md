@@ -19,7 +19,16 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    require 'knights_who_say_ni'
+    KnightsWhoSayNi::FieldMarshal[2, 3].pairings.each do |pairing|
+      white_pos = pairing[:white]
+      black_pos = pairing[:black]
+      puts "#{white_pos} - #{black_pos}"
+    end
+
+Or via commandline:
+
+    $ ./bin/ni 2 3
 
 ## Contributing
 
